@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+
+<section class="page-title bg-1">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="block text-center">
+          <span class="text-white">Book your Seat</span>
+          <h1 class="text-capitalize mb-5 text-lg">Appoinment</h1>
+
+          <!-- <ul class="list-inline breadcumb-nav">
+            <li class="list-inline-item"><a href="index.html" class="text-white">Home</a></li>
+            <li class="list-inline-item"><span class="text-white">/</span></li>
+            <li class="list-inline-item"><a href="#" class="text-white-50">Book your Seat</a></li>
+          </ul> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="appoinment section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4">
+          <div class="mt-3">
+            <div class="feature-icon mb-3">
+              <i class="icofont-support text-lg"></i>
+            </div>
+             <span class="h3">Call for an Emergency Service!</span>
+              <h2 class="text-color mt-3">+84 111 0000 </h2>
+          </div>
+      </div>
+
+      <div class="col-lg-8">
+           <div class="appoinment-wrap mt-5 mt-lg-0 pl-lg-5">
+            <h2 class="mb-2 title-color">Book an appoinment</h2>
+            <p class="mb-4">Mollitia dicta commodi est recusandae iste, natus eum asperiores corrupti qui velit . Iste dolorum atque similique praesentium soluta.</p>
+
+
+                <div class="col-lg-8">
+           <div class="appoinment-wrap mt-5 mt-lg-0 pl-lg-5">
+               {% if user.is_authenticated %}
+
+                <form method="POST" class="form-group">
+<!--                    <div class="row">-->
+<!--                        <div class="col-lg-6">-->
+<!--                            <div class="form-group">-->
+
+
+
+                    {% csrf_token %}
+<!--                    <input type="text" name="name" placeholder="enter the movie name"><br>-->
+<!--&lt;!&ndash;                    <input type="text" name="department" placeholder="enter the department name"><br>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <input type="text" name="doctor" placeholder="enter the doctor name"><br>&ndash;&gt;-->
+<!--                     <select name="department">-->
+<!--                         {% for i in obj %}-->
+<!--                     <option value={{i.name}}>{{i.name}}</option>-->
+<!--                         {% endfor %}-->
+<!--                     </select><br>-->
+<!--                    <select name="doctor">-->
+<!--                         {% for i in doc %}-->
+<!--                     <option value="{{i.name}}">{{i.name}}</option>-->
+<!--                         {% endfor %}-->
+<!--                     </select><br>-->
+<!--                    <input type="date" name="date" placeholder="enter the  details"><br>-->
+<!--                    <input type="time" name="time" placeholder="enter the year"><br>-->
+<!--                    <input type="text" name="phone" placeholder="enter the number"><br>-->
+<!--                    <input type="text" name="pst_msg" placeholder="enter the details"><br>-->
+                    {{form.as_p}}
+                    <br>
+
+                    <input class="btn btn-main btn-round-full" type="submit">
+
+</form>
+               {% else %}
+               <br><br>
+                <h3 class="mb-2 title-color">Please login first.!! </h3>
+               <p>Click <a href="{% url 'user_login' %}"><i style="color:red;">here</i></a></p>
+               <br><br>
+
+               {% endif %}
+
+                 </div>
+                    </div>
+
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+

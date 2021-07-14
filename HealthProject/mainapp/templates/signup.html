@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+Login Here
+{% endblock %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<section class="page-title bg-1">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="block text-center">
+          <span class="text-white"></span>
+          <h1 class="text-capitalize mb-5 text-lg">Sign Up</h1>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="appoinment section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4">
+          <div class="mt-3">
+            <div class="feature-icon mb-3">
+              <i class="icofont-support text-lg"></i>
+            </div>
+             <span class="h3">Call for an Emergency Service!</span>
+              <h2 class="text-color mt-3">+84 111 0000 </h2>
+          </div>
+      </div>
+
+      <div class="col-lg-8">
+           <div class="appoinment-wrap mt-5 mt-lg-0 pl-lg-5">
+            <h2 class="mb-2 title-color">Register Now..</h2>
+            <p class="mb-4">Mollitia dicta commodi est recusandae iste, natus eum asperiores corrupti qui velit . Iste dolorum atque similique praesentium soluta.</p>
+    <form method="POST" class="form-group">
+	{% csrf_token %}
+	{{ form|crispy }}
+		<br>
+        <p>Already registered user? Please Login <a href="{% url 'user_login' %}">here</a></p>
+	<button type="submit" class="btn btn-success">Register</button>
+
+    </form>
+           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
