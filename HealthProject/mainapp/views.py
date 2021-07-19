@@ -1,5 +1,5 @@
 from builtins import Exception
-
+from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from .forms import RegisterForm,PatientForm
 from django.contrib.auth import login,logout,authenticate
@@ -14,6 +14,8 @@ from django.shortcuts import render, HttpResponse, get_object_or_404
 def index(request):
     return render(request,'index.html')
 
+def app_det(request):
+    return render(request,'app_details.html')
 
 def department(request):
     department=Department.objects.all()
@@ -28,10 +30,10 @@ def user_signup(request):
         form=RegisterForm(request.POST)
         if form.is_valid():
             form.save()
-        return redirect('user_login')
+            return redirect('user_login')
     else:
         form =RegisterForm()
-        return render(request, "signup.html", {"form": form})
+    return render(request, "signup.html", {"form": form})
 
 def user_login(request):
     if request.method=="POST":
@@ -45,13 +47,11 @@ def user_login(request):
             login(request,user)
                 # messages.info(request,f"You are now logged in as {username}.")
             return redirect('/')
-            # else:
-            #     messages.error(request, "Invalid username or password.")
         else:
             messages.error(request, "Invalid username or password.")
     else:
         form=AuthenticationForm()
-        return render(request,"login.html",{"login_form":form})
+    return render(request,"login.html",{"login_form":form})
 
 def user_logout(request):
     # if request.method=="POST":
@@ -60,20 +60,38 @@ def user_logout(request):
 
 
 def appoinment(request):
+    form = PatientForm()
     context = {}
-
-    # create object of form
-    form = PatientForm(request.POST or None)
-
-    # check if form data is valid
-    if form.is_valid():
-        # save the form data to model
-        form.save()
-        messages.success(request,"Success, we will contact you soon...")
-        return redirect('/')
-
+    initial_dict = {
+        'user':request.user,
+    }
+    form = PatientForm(request.POST or None,initial=initial_dict)
     context['form'] = form
+    if request.method == "POST":
+        form = PatientForm(request.POST or None,initial=initial_dict)
+        context['form'] = form
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Success, we will contact you soon...")
+            return redirect('app_det')
     return render(request, "appoinment.html", context)
+
+
+
+
+
+
+    # if request.method == "POST":
+    #     context = {}
+    #     form = PatientForm(request.POST)
+    #     if form.is_valid():
+    #     # save the form data to model
+    #         form.save()
+    #         messages.success(request,"Success, we will contact you soon...")
+    #         return redirect('/')
+    #
+    #     context['form'] = form
+    # return render(request, "appoinment.html", context)
 
 
 def dep_detail(request,slug):
@@ -89,6 +107,15 @@ def doc_detail(request,slug):
     except Exception as e:
         raise e
     return render(request,'doc_detail.html',{'doc':detail})
+
+def app_det(request):
+    try:
+        detail=Patient.objects.get(user=request.user)
+    except Exception as e:
+        detail=None
+    return render(request,'app_details.html',{'doc':detail})
+
+
 
 
 
