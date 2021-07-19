@@ -63,7 +63,6 @@
 	</div>
 </section>
 
-
 <section class="section about">
 	<div class="container">
 		<div class="row align-items-center">
@@ -83,12 +82,75 @@
 					<h2 class="title-color">Our <br>Doctors </h2>
 					<p class="mt-4 mb-5">We provide best leading medicle service Nulla perferendis veniam deleniti ipsum officia dolores repellat laudantium obcaecati neque.</p>
 
-					<a href="{% url 'doctor' %}" class="btn btn-main-2 btn-round-full btn-icon">Services<i class="icofont-simple-right ml-3"></i></a>
+<!--					<a href="{% url 'doctor' %}" class="btn btn-main-2 btn-round-full btn-icon">Services<i class="icofont-simple-right ml-3"></i></a>-->
 				</div>
 			</div>
 		</div>
 	</div>
 </section>
+
+
+<section class="section doctors">
+  <div class="container">
+  	  <div class="row justify-content-center">
+             <div class="col-lg-6 text-center">
+                <div class="section-title">
+                    <h2>Doctors</h2>
+                    <div class="divider mx-auto my-4"></div>
+                    <p>We provide a wide range of creative services adipisicing elit. Autem maxime rem modi eaque, voluptate. Beatae officiis neque </p>
+                </div>
+            </div>
+        </div>
+
+<!--      <div class="col-12 text-center  mb-5">-->
+<!--	        <div class="btn-group btn-group-toggle " data-toggle="buttons">-->
+<!--	          <label class="btn active ">-->
+<!--	            <input type="radio" name="shuffle-filter" value="all" checked="checked" />All Department-->
+<!--	          </label>-->
+<!--	          <label class="btn ">-->
+<!--	            <input type="radio" name="shuffle-filter" value="cat1" />Cardiology-->
+<!--	          </label>-->
+<!--	          <label class="btn">-->
+<!--	            <input type="radio" name="shuffle-filter" value="cat2" />Dental-->
+<!--	          </label>-->
+<!--	          <label class="btn">-->
+<!--	            <input type="radio" name="shuffle-filter" value="cat3" />Neurology-->
+<!--	          </label>-->
+<!--	          <label class="btn">-->
+<!--	            <input type="radio" name="shuffle-filter" value="cat4" />Medicine-->
+<!--	          </label>-->
+<!--	           <label class="btn">-->
+<!--	            <input type="radio" name="shuffle-filter" value="cat5" />Pediatric-->
+<!--	          </label>-->
+<!--	          <label class="btn">-->
+<!--	            <input type="radio" name="shuffle-filter" value="cat6" />Traumatology-->
+<!--	          </label>-->
+<!--	        </div>-->
+<!--      </div>-->
+
+    <div class="row shuffle-wrapper portfolio-gallery">
+        {% for i in docs %}
+      	<div class="col-lg-3 col-sm-6 col-md-6 mb-4 shuffle-item" data-groups="[&quot;cat1&quot;,&quot;cat2&quot;]">
+	      	<div class="position-relative doctor-inner-box">
+		        <div class="doctor-profile">
+	               <div class="doctor-img">
+	               		<img src="{{i.image.url}}" alt="doctor-image" class="img-fluid w-100">
+	               </div>
+	            </div>
+                <div class="content mt-3">
+                	<h4 class="mb-0"><a href="{% url 'doc_detail' i.slug %}">{{i.name}}</a></h4>
+                	<p>{{i.department}}</p>
+                </div>
+	      	</div>
+      	</div>
+		{% endfor %}
+
+
+    </div>
+  </div>
+</section>
+
+
 
 <section class="section service gray-bg">
 	<div class="container">
