@@ -30,6 +30,7 @@ TIME_CHOICES = (
 
 
 class Patient(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=250, unique=True)
     date = models.DateField()
     time = models.CharField(choices=TIME_CHOICES,max_length=250)
@@ -37,6 +38,7 @@ class Patient(models.Model):
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
     phone=models.CharField(max_length=50)
     message = models.CharField(max_length=300)
+
 
     def __str__(self):
         return  self.name
