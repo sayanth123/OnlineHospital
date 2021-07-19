@@ -35,14 +35,22 @@
 			  <li class="nav-item active">
 				<a class="nav-link" href="{% url 'index' %}">Home</a>
 			  </li>
-			   <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+				{% if user.is_authenticated %}
+			   <li class="nav-item"><a class="nav-link" href="{% url 'app_det' %}">Appoinment Detalis</a></li>
+				{% else %}
+				{% endif %}
 
 
 			    <li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" href="department.html" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Department <i class="icofont-thin-down"></i></a>
 					<ul class="dropdown-menu" aria-labelledby="dropdown02">
-						<li><a class="dropdown-item" href="{% url 'department' %}">Departments</a></li>
+						{% for i in links %}
+						<li><a class="dropdown-item" href="{% url 'dep_detail' i.slug %}">{{i.name}}</a></li>
+						{% endfor %}
 					</ul>
+<!--					<ul class="dropdown-menu" aria-labelledby="dropdown02">-->
+<!--						<li><a class="dropdown-item" href="#">hi</a></li>-->
+<!--					</ul>-->
 			  	</li>
 
 			  	<li class="nav-item dropdown">
